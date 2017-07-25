@@ -155,7 +155,7 @@ class pix2pix(object):
         for epoch in xrange(args.epoch):
             data = glob('./datasets/{}/train/*.jpg'.format(self.dataset_name))
             #np.random.shuffle(data)
-            batch_idxs = min(len(data), args.train_size) // self.batch_size
+            batch_idxs = min(len(data), args.train_size) // self.batch_size     # // : floor division
 
             for idx in xrange(0, batch_idxs):
                 batch_files = data[idx*self.batch_size:(idx+1)*self.batch_size]
@@ -180,7 +180,7 @@ class pix2pix(object):
                                                feed_dict={ self.real_data: batch_images })
                 self.writer.add_summary(summary_str, counter)
 
-                errD_fake = self.d_loss_fake.eval({self.real_data: batch_images})
+                errD_fake = self.d_loss_fake.eval({self.real_data: batch_images}) #eval() expression given is treated as same as corresponding python dtype
                 errD_real = self.d_loss_real.eval({self.real_data: batch_images})
                 errG = self.g_loss.eval({self.real_data: batch_images})
 
@@ -216,6 +216,10 @@ class pix2pix(object):
             h4 = linear(tf.reshape(h3, [self.batch_size, -1]), 1, 'd_h3_lin')
 
             return tf.nn.sigmoid(h4), h4
+
+#######################
+#read from here (0725)#
+#######################
 
     def generator(self, image, y=None):
         with tf.variable_scope("generator") as scope:
