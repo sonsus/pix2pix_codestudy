@@ -20,12 +20,12 @@ get_stddev = lambda x, k_h, k_w: 1/math.sqrt(k_w*k_h*x.get_shape()[-1])
 def load_data(image_path, flip=True, is_test=False):
     img_A, img_B = load_image(image_path)
     print("after load_image (inside load_data())")
-    print("imgA:\t{a}"format(a=img_A.shape) )
-    print("imgB:\t{b}"format(b=img_B.shape) )
+    print("imgA:\t{a}".format(a=img_A.shape) )
+    print("imgB:\t{b}".format(b=img_B.shape) )
     img_A, img_B = preprocess_A_and_B(img_A, img_B, flip=flip, is_test=is_test)
     print("\nafter preprocess_AandB (inside load_data)")
-    print("imgA:\t{a}"format(a=img_A.shape) )
-    print("imgB:\t{b}"format(b=img_B.shape) )    
+    print("imgA:\t{a}".format(a=img_A.shape) )
+    print("imgB:\t{b}".format(b=img_B.shape) )    
 
     img_A = img_A/127.5 - 1.
     img_B = img_B/127.5 - 1.
